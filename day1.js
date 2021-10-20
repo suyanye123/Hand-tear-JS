@@ -1,20 +1,10 @@
 // debounce 防抖,多次只执行最后一次
-function debounce(fn, time) {
-  let b = false;
-  let a;
-  if (!b) {
-    b = true;
-    a = setTimeout(() => {
-      fn();
-      b = false;
-    }, time);
-  } else {
-    clearTimeout(a);
-    a = setTimeout(() => {
-      fn();
-      b = false;
-    }, time);
+function debounce(callback, wait) {
+  let timer = null;
+  // 如果已经有
+  if (timer) {
   }
+  // 如果没有
 }
 
 // trottle 节流,每隔一段时间执行一次
