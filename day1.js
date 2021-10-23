@@ -1,22 +1,30 @@
-// debounce 防抖,多次只执行最后一次
+// debounce 防抖,多次只执行最后一次,返回结果是一个函数
 function debounce(callback, wait) {
   let timer = null;
-  // 如果已经有
-  if (timer) {
-  }
-  // 如果没有
+  return function (e) {
+    // 如果已经有
+    if (timer !== null) {
+      clearTimeout(timer);
+    } else {
+      // 如果没有,开启定时
+      timer = setTimeout(() => {
+        callback.call(this, e);
+        timer = null;
+      }, wait);
+    }
+  };
 }
 
 // trottle 节流,每隔一段时间执行一次
-function trottle(fn, time) {
-  let a = false;
-  if (!a) {
-    a = true;
-    fn();
-    setTimeout(() => {
-      a = false;
-    }, time);
-  }
+function trottle(callback, wait) {
+  let start = 0;
+  return function (e) {
+    let now = Date.now();
+    if (now - start >= wait) {
+      callback.call(this, e);
+      start = now;
+    }
+  };
 }
 
 // promise.all  输入是由多个Promise对象组成的一个数组，最后输出一个新的Promise对象。成功时返回的是一个结果数组，和输入的promise数组顺序是一致的，失败时则返回最先被reject的错误值。   并展示一个例子
