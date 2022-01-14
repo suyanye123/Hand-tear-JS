@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .btn {
+        width: 50px;
+        height: 50px;
+        margin: 0 50px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      网上基本都是用的高阶函数实现，即封装一个工具函数
+      debounce，它以参数形式接收原函数，并返回一个经过防抖处理的新函数，后续涉及到需要防抖处理的，都需要使用新函数来替代原函数。
+    </p>
+    <div type="button" class="btn" onclick="btn()">点我</div>
+  </body>
+  <script>
+    function btn() {
+      let a = debounce(
+        setTimeout(() => {
+          console.log("111");
+        }, 1000),
+        1000
+      );
+      console.log(a);
+    }
+    function debounce(callback, wait) {
+      let timer = null;
+      console.log("进来了", timer);
+      return function (e) {
+        // 如果已经有
+        if (timer !== null) {
+          console.log("进来了1", timer);
+          clearTimeout(timer);
+          console.log("清空了吗", timer);
+        } else {
+          // 如果没有,开启定时
+          console.log("进来了2", timer);
+          timer = setTimeout(() => {
+            callback.call(this, e);
+            timer = null;
+          }, wait);
+        }
+      };
+    }
+  </script>
+</html>

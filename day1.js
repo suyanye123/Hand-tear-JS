@@ -62,21 +62,24 @@ promiseAll([p1, p2, p3])
     console.log(err);
   });
 
-//防抖,多次点击只执行最后一次,定时器
-function debounce(callback, wait) {
+//防抖,多次点击只执行最后一次,定时器,返回一个函数
+function debounce(cb, wait) {
   let timer = null;
   return function (e) {
-    //如果点击了
-    if (timer !== null) {
-      clearTimeout(timer);
-    } else {
-      timer = setTimeout(() => {
-        callback.call(this, e);
-        timer = null;
-      }, wait);
+    if (timer == null) {
+      setTimeout(() => {}, wait);
     }
   };
 }
 
-//节流，多次点击每隔一段时间执行一次
-function trottle(callback, wait) {}
+//节流，多次点击每隔一段时间执行一次,时间戳，返回一个函数
+function trottle(callback, wait) {
+  let start = 0;
+  return function (e) {
+    let now = Date.now();
+    if (now - start >= wait) {
+      callback.call(this, ...arguments);
+      start = now;
+    }
+  };
+}
