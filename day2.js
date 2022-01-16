@@ -4,8 +4,43 @@
 
 //call和apply的区别是:第一个参数都是要绑定的this,但是 apply第二个参数(函数的参数)为数组,call是多个的;
 
-function call() {}
+// 节流
+function trottle(callback, wait) {
+  let start = 0;
+  return function (e) {
+    let now = Date.now();
+    // 如果没触发
+    if (now - start >= wait) {
+      this.call(callback, this);
+      start = now;
+    }
+  };
+}
 
-function apply() {}
+//防抖
+function debounce(callback, wait) {
+  let timer;
+  return function (e) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        this.call(callback, this);
+        timer = null;
+      }, wait);
+    } else {
+      clearTimeout(timer);
+    }
+  };
+}
 
-function bind() {}
+//call
+function call(fn, obj, ...args) {
+  if (obj == null || obj == undefined) {
+    obj = globalThis;
+  }
+  obj.temp = fn;
+  let result = obj.temp(...args);
+  delete obj.temp;
+  return result;
+}
+
+//结果 防抖节流错误，call正确
