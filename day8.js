@@ -46,7 +46,7 @@ function bind(fn, obj, ...args) {
     return call(fn, obj, ...args, ...args2);
   };
 }
-//map reduce filter
+//map reduce filter find findIndex
 function map(arr, cb) {
   let result = [];
   for (let i = 0; i < arr.length; i++) {
@@ -70,6 +70,24 @@ function filter(arr, cb) {
     }
   }
   return result;
+}
+function find(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    let res = cb(arr[i], i);
+    if (res) {
+      return arr[i];
+    }
+  }
+  return undefined;
+}
+function findIndex(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    let res = cb(arr[i], i);
+    if (res) {
+      return i;
+    }
+  }
+  return -1;
 }
 //set
 function unique(arr) {
