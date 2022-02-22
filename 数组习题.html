@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // filter
+        // var newarr = [2, 4, 6, 7, 9];
+        // // var constNewArr = newarr.filter(item => item != 2).filter(item => item != 4);
+        // var constNewArr = newarr.filter(item => {
+        //     return item != 2 && item != 4
+        // })
+        // console.log(constNewArr);
+
+        //splice
+        // let fruits = [2, 4, 6, 7, 9]
+        //     //参数1：从第几位开始截取  参数2：截取的长度
+        // let constnewArr1 = fruits.splice(2, 3);
+        // console.log(constnewArr1);
+
+        // //slice
+        // let fruits1 = [2, 4, 6, 7, 9];
+        // //参数1：从第几位开始截取  参数2：截取到第几位
+        // let constnewArr2 = fruits1.slice(2, 5);
+        // console.log(constnewArr2)
+
+        // //push
+        // let list = [2, 3, 4, 5];
+        // let constnewArr3 = list.push(6) && list.unshift(1)
+        // console.log(list);
+
+        // let item1 = [1, 3, 4, 5];
+        // let constnewArr4 = item1.splice(-2);
+        // console.log(constnewArr4);
+
+        // const months = ['jan', 'march', 'april', 'june'];
+        // months.splice(1, 0, 'feb');
+        // console.log(months)
+
+        // let arr = [1, 3, 4, 5];
+        // let constnewArr4 = arr.splice(2, 1);
+        // console.log(arr.reverse());
+
+        // const myArray = [1, 2, 3, 4, 5, 2, 3, 4];
+        // console.log([...new Set(myArray)]);
+
+        // function dedupe(array) {
+        //     return Array.from(new Set(array));
+        // }
+        // dedupe([1, 2, 3, 4, 5, 2, 3, 4]);
+
+        // let a = [1, 2, 3, 4, 5, 2, 3, 4]
+        // let b = new Set(a)
+        // console.log(b);
+
+        // let arr = [1, 4, -2, 5, 0, -1, 3, 8];
+        // let constArr = arr.find((n) => {
+        //     return n < 1;
+        // });
+        // console.log(constArr)
+
+        let myArray1 = [1, 3, 4, 5, 0, 0, 6, 6, 0, 5, 4, 7, 6, 7, 0, 5];
+
+        var constnewArr5 = [];
+        for (var i in myArray1) {
+            if (myArray1[i] != 0) {
+                constnewArr5.push(myArray1[i]);
+            }
+        }
+        console.log(constnewArr5);
+    </script>
+</body>
+
+</html>
