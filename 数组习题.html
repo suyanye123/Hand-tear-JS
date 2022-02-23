@@ -65,15 +65,33 @@
         // });
         // console.log(constArr)
 
-        let myArray1 = [1, 3, 4, 5, 0, 0, 6, 6, 0, 5, 4, 7, 6, 7, 0, 5];
+        // let myArray1 = [1, 3, 4, 5, 0, 0, 6, 6, 0, 5, 4, 7, 6, 7, 0, 5];
 
-        var constnewArr5 = [];
-        for (var i in myArray1) {
-            if (myArray1[i] != 0) {
-                constnewArr5.push(myArray1[i]);
+        // var constnewArr5 = [];
+        // for (var i in myArray1) {
+        //     if (myArray1[i] != 0) {
+        //         constnewArr5.push(myArray1[i]);
+        //     }
+        // }
+        // console.log(constnewArr5);
+
+        // let a = [1, 7, 9, 11, 13, 15, 17, 19];
+        // let b = [2, 4, 6, 8, 10]
+        // let c = {
+        //     ...a,
+        //     ...b
+        // }
+        // console.log(c);
+
+        // 数组去重
+        let arr = [1, 2, 3, 4, 5, 2, 3, 4];
+        let arrResult = arr.reduce((pre, cur) => {
+            if (!pre.includes(cur)) {
+                pre.push(cur)
             }
-        }
-        console.log(constnewArr5);
+            return pre;
+        }, [])
+        console.log(arrResult);
     </script>
 </body>
 

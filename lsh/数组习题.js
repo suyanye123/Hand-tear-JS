@@ -69,6 +69,9 @@ for (var i in myArray1) {
 console.log(constnewArr5);
 
 // 6.现在给出两个数组：数组a：[1,7,9,11,13,15,17,19] 数组b：[2,4,6,8,10] ，请将两个数组合并为数组c并返回，请至少写出两种实现方式
+let a = [1, 7, 9, 11, 13, 15, 17, 19];
+let b = [2, 4, 6, 8, 10]
+console.log(...a, ...b)
 
 //7.发散题  已知arr = [1,2,3,4,5,2,3,4]; 请将arr数组去重 （至少三种方式）
 
@@ -80,3 +83,13 @@ console.log([...new Set(myArray)]);
 let arr = [1, 2, 3, 4, 5, 2, 3, 4]
 let result = new Set(arr)
 console.log(result);
+
+// 数组去重
+let arr = [1, 2, 3, 4, 5, 2, 3, 4];
+let arrResult = arr.reduce((pre, cur) => {
+    if (!pre.includes(cur)) {
+        pre.push(cur)
+    }
+    return pre;
+}, [])
+console.log(arrResult);
