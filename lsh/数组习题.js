@@ -66,12 +66,27 @@ for (var i in myArray1) {
         constnewArr5.push(myArray1[i]);
     }
 }
-console.log(constnewArr5);
+// console.log(constnewArr5);// [1, 3, 4, 5, 6, 6, 5, 4, 7, 6, 7, 5]
+
+
+
 
 // 6.现在给出两个数组：数组a：[1,7,9,11,13,15,17,19] 数组b：[2,4,6,8,10] ，请将两个数组合并为数组c并返回，请至少写出两种实现方式
+//concat()方法，连接两个或更多的数组，并返回结果。
 let a = [1, 7, 9, 11, 13, 15, 17, 19];
-let b = [2, 4, 6, 8, 10]
-console.log(...a, ...b)
+let b = [2, 4, 6, 8, 10];
+let c = a.concat(b);
+console.log(c);
+
+
+
+//第二种 用 for in 遍历
+let a = [1, 7, 9, 11, 13, 15, 17, 19];
+let b = [2, 4, 6, 8, 10];
+for (let i in b) {
+    a.push(b[i]);
+}
+console.log(a);
 
 //7.发散题  已知arr = [1,2,3,4,5,2,3,4]; 请将arr数组去重 （至少三种方式）
 

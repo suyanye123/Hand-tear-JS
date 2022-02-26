@@ -6,92 +6,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./js/vue.js"></script>
 </head>
 
 <body>
+    <!-- <div id="root">
+        <form action="" @submit.prevent="demo">
+            prevent 阻止默认行为
+            账号：<input type="text" v-model.userInfo="account"><br><br> 密码：
+            <input type="password" v-model.userInfo="password"><br><br> 性别： 男
+            <input type="radio" name="sex" v-model.userInfo="sex" value="male"> 女
+            <input type="radio" name="sex" v-model.userInfo="sex" value="female"> <br><br> 爱好： 学习
+            <input type="checkbox" v-model.userInfo="hoddy" value="study"> 打游戏
+            <input type="checkbox" v-model.userInfo="hoddy" value="games"> 吃饭
+            <input type="checkbox" v-model.userInfo="hoddy" value="eat"> <br><br> 所属校区
+            <select name="" id="" v-model.userInfo="city">
+                <option value="">请选择小区</option>
+                <option value="">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzheng">深圳</option>
+                <option value="wuhan">武汉</option>
+            </select><br><br> 其他信息：
+            <textarea v-model.userInfo="other"></textarea><br><br>
+            <input type="checkbox" v-model="agree"> 阅读并接受<a href="#">《用户协议》</a>
+            <button>提交</button>
+        </form>
+
+
+        <hr>
+        
+    </div> -->
+
+    <div id="root">
+        <h2 :style="{opacity}">欢迎来到我的世界</h2>
+    </div>
     <script>
-        // filter
-        // var newarr = [2, 4, 6, 7, 9];
-        // // var constNewArr = newarr.filter(item => item != 2).filter(item => item != 4);
-        // var constNewArr = newarr.filter(item => {
-        //     return item != 2 && item != 4
-        // })
-        // console.log(constNewArr);
+        Vue.config.productionTip = false
 
-        //splice
-        // let fruits = [2, 4, 6, 7, 9]
-        //     //参数1：从第几位开始截取  参数2：截取的长度
-        // let constnewArr1 = fruits.splice(2, 3);
-        // console.log(constnewArr1);
+        new Vue({
+            el: "#root",
+            data: {
+                userInfo: {
+                    account: '',
+                    password: '',
+                    sex: 'female',
+                    hoddy: [],
+                    city: '',
+                    other: '',
+                    agree: ''
+                },
+                opacity: 1
 
-        // //slice
-        // let fruits1 = [2, 4, 6, 7, 9];
-        // //参数1：从第几位开始截取  参数2：截取到第几位
-        // let constnewArr2 = fruits1.slice(2, 5);
-        // console.log(constnewArr2)
+            },
+            methods: {
+                demo() {
+                    // alert(1)
+                    // console.log(JSON.stringify(this._data))
+                    console.log(JSON.stringify(this.userInfo))
+                },
 
-        // //push
-        // let list = [2, 3, 4, 5];
-        // let constnewArr3 = list.push(6) && list.unshift(1)
-        // console.log(list);
-
-        // let item1 = [1, 3, 4, 5];
-        // let constnewArr4 = item1.splice(-2);
-        // console.log(constnewArr4);
-
-        // const months = ['jan', 'march', 'april', 'june'];
-        // months.splice(1, 0, 'feb');
-        // console.log(months)
-
-        // let arr = [1, 3, 4, 5];
-        // let constnewArr4 = arr.splice(2, 1);
-        // console.log(arr.reverse());
-
-        // const myArray = [1, 2, 3, 4, 5, 2, 3, 4];
-        // console.log([...new Set(myArray)]);
-
-        // function dedupe(array) {
-        //     return Array.from(new Set(array));
-        // }
-        // dedupe([1, 2, 3, 4, 5, 2, 3, 4]);
-
-        // let a = [1, 2, 3, 4, 5, 2, 3, 4]
-        // let b = new Set(a)
-        // console.log(b);
-
-        // let arr = [1, 4, -2, 5, 0, -1, 3, 8];
-        // let constArr = arr.find((n) => {
-        //     return n < 1;
-        // });
-        // console.log(constArr)
-
-        // let myArray1 = [1, 3, 4, 5, 0, 0, 6, 6, 0, 5, 4, 7, 6, 7, 0, 5];
-
-        // var constnewArr5 = [];
-        // for (var i in myArray1) {
-        //     if (myArray1[i] != 0) {
-        //         constnewArr5.push(myArray1[i]);
-        //     }
-        // }
-        // console.log(constnewArr5);
-
-        // let a = [1, 7, 9, 11, 13, 15, 17, 19];
-        // let b = [2, 4, 6, 8, 10]
-        // let c = {
-        //     ...a,
-        //     ...b
-        // }
-        // console.log(c);
-
-        // 数组去重
-        let arr = [1, 2, 3, 4, 5, 2, 3, 4];
-        let arrResult = arr.reduce((pre, cur) => {
-            if (!pre.includes(cur)) {
-                pre.push(cur)
+            },
+            // Vue完成模板的解析并把初始化的真实DOM放在页面之后（挂载完成之后）调用mounted
+            mounted() {
+                console.log('mounted')
+                setInterval(() => {
+                    this.opacity -= 0.01
+                        // 进行判断
+                    if (this.opacity <= 0) {
+                        this.opacity = 1
+                    }
+                }, 16);
             }
-            return pre;
-        }, [])
-        console.log(arrResult);
+        })
     </script>
 </body>
 
