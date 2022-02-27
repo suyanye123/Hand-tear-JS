@@ -38,44 +38,58 @@
     </div> -->
 
     <div id="root">
-        <h2 :style="{opacity}">欢迎来到我的世界</h2>
+        <h2>今天天气很{{info}}-{{add}}</h2>
+        <button @click="weatherClick()">按钮</button>
     </div>
     <script>
         Vue.config.productionTip = false
 
-        new Vue({
+        const vm = new Vue({
             el: "#root",
             data: {
-                userInfo: {
-                    account: '',
-                    password: '',
-                    sex: 'female',
-                    hoddy: [],
-                    city: '',
-                    other: '',
-                    agree: ''
-                },
-                opacity: 1
+                isHot: false,
+                add: 1
 
             },
             methods: {
-                demo() {
-                    // alert(1)
-                    // console.log(JSON.stringify(this._data))
-                    console.log(JSON.stringify(this.userInfo))
-                },
-
+                weatherClick() {
+                    this.isHot = !this.isHot
+                    this.add++
+                }
             },
-            // Vue完成模板的解析并把初始化的真实DOM放在页面之后（挂载完成之后）调用mounted
-            mounted() {
-                console.log('mounted')
-                setInterval(() => {
-                    this.opacity -= 0.01
-                        // 进行判断
-                    if (this.opacity <= 0) {
-                        this.opacity = 1
-                    }
-                }, 16);
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            // watch: {
+            //     'isHot': {
+            //         immediate: true, //初始化时让handler调用一下
+            //         handler(newValue, oldValue) {
+            //             console.log('ishot值被修改了', newValue, oldValue)
+            //         }
+            //     }
+            // }
+
+
+
+            // // Vue完成模板的解析并把初始化的真实DOM放在页面之后（挂载完成之后）调用mounted
+            // mounted() {
+            //     console.log('mounted')
+            //     setInterval(() => {
+            //         this.opacity -= 0.01
+            //             // 进行判断
+            //         if (this.opacity <= 0) {
+            //             this.opacity = 1
+            //         }
+            //     }, 16);
+            // }
+
+        })
+        vm.$watch('isHot', {
+            immediate: true, //初始化时让handler调用一下
+            handler(newValue, oldValue) {
+                console.log('isHot被修改了', newValue, oldValue)
             }
         })
     </script>
