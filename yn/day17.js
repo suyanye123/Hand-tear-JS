@@ -49,7 +49,43 @@ function map(arr, cb) {
 
 function reduce(arr, cb, initValue) {
   let result = initValue;
-  for (let i = 0; i < arr.length; i++) {}
+  for (let i = 0; i < arr.length; i++) {
+    result = cb(result, cb(arr[i]));
+  }
+  return result;
 }
 
 //clone1 clone2 concat slice
+function clone1(target) {
+  if (typeof target == "object" && typeof target !== null) {
+    if (Array.isArray(target)) {
+      return [...target];
+    } else {
+      return { ...target };
+    }
+  } else {
+    return target;
+  }
+}
+
+function clone2(target) {
+  if (typeof target == "object" && typeof target !== null) {
+    let result = Array.isArray(target) ? [] : {};
+    for (let key in target) {
+      if (target.hasOwnProperty(key)) {
+        result[key] = target[key];
+      }
+    }
+  } else {
+    return target;
+  }
+}
+function concat(arr, ...args) {
+  args.forEach((item) => {
+    if (Array.isArray(item)) {
+      arr.push(...item);
+    } else {
+      arr.push(item);
+    }
+  });
+}
