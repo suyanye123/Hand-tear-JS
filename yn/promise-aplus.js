@@ -2,6 +2,46 @@
 const PENDING = "PENDING";
 const FULFILLED = "FULFILLED";
 const REJECTED = "REJECTED";
+function resolvePromise(promise2, x, resolve, reject) {
+  //promise不能循环调用，判断x值不是promis2自己
+  if (promise2 === x) {
+    return reject(
+      new TypeError("Chaining cycle detected for promise #<Promise>")
+    );
+  }
+  // 引用数据类型？
+  if ((typeof x === "object" && x !== null) || typeof x === "function") {
+    let called;
+    try {
+      const then = x.then;
+      if (typeof then !== "function") {
+        resolve(x);
+      } else {
+        then.call(
+          x,
+          (value) => {
+            if (called) return;
+            called = true;
+            resolvePromise(promise2, value, resolve, reject);
+          },
+          (reason) => {
+            if (called) return;
+            called = true;
+            reject(reason);
+          }
+        );
+      }
+    } catch (error) {
+      if (called) return;
+      called = true;
+      reject(error);
+    }
+  }
+  //常量
+  else {
+    resolve(x);
+  }
+}
 class PromiseA {
   //eg ze cuter
   constructor(executor) {
@@ -46,34 +86,71 @@ class PromiseA {
         throw err;
       };
     }
-    //只执行一次
-    if (this.state === PENDING) {
-      this.onFulfilledCB.push(() => {
-        setTimeout(() => {
-          onFulfilled(this.value);
-        });
-      });
-      this.onRejectedCB.push(() => {
-        setTimeout(() => {
-          onRejected(this.reason);
-        });
-      });
-    }
-    if (this.state === FULFILLED) {
-      setTimeout(() => {
-        onFulfilled(this.value);
-      });
-    }
-    if (this.state === REJECTED) {
-      setTimeout(() => {
-        onRejected(this.reason);
-      });
-    }
+
     //返回一个新的promise
-    let promise2 = new PromiseA(() => {});
+    let promise2 = new PromiseA((resolve, reject) => {
+      //只执行一次
+      if (this.state === PENDING) {
+        this.onFulfilledCB.push(() => {
+          setTimeout(() => {
+            try {
+              const x = onFulfilled(this.value);
+              resolvePromise(promise2, x, resolve, reject);
+            } catch (error) {
+              reject(error);
+            }
+          });
+        });
+        this.onRejectedCB.push(() => {
+          setTimeout(() => {
+            try {
+              const x = onRejected(this.reason);
+              resolvePromise(promise2, x, resolve, reject);
+            } catch (error) {
+              reject(error);
+            }
+          });
+        });
+      }
+      if (this.state === FULFILLED) {
+        setTimeout(() => {
+          try {
+            const x = onFulfilled(this.value);
+            resolvePromise(promise2, x, resolve, reject);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+      if (this.state === REJECTED) {
+        setTimeout(() => {
+          try {
+            const x = onRejected(this.reason);
+            resolvePromise(promise2, x, resolve, reject);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+    });
     return promise2;
   }
   catch() {}
 }
 
 //test code
+/**
+ *安装 Promise 测试工具
+npm i promises-aplus-tests -g
+运行测试工具，检测 Promise 是否符合规范
+promises-aplus-tests 文件名
+ */
+Promise.defer = Promise.deferred = function () {
+  let dfd = {};
+  dfd.promise = new Promise((resolve, reject) => {
+    dfd.resolve = resolve;
+    dfd.reject = reject;
+  });
+  return dfd;
+};
+module.exports = Promise;
