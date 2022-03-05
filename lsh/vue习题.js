@@ -11,8 +11,7 @@
 
 
 //2. v-if 和 v-for  可以一起使用吗，为什么？ 谁的层级更高
-// v -for 用于展示列表数据， 
-// 语法： v -for = (item, index) in xxx: key = "yyy", 可以遍历数组， 对象， 字符串， 指定次数
+
 
 
 //3.vue的生命周期是什么，大概有哪些
@@ -82,6 +81,11 @@
 //     //     }
 //     // }
 
+//      简写
+// 'isHot'(newValue,oldValue){
+//     console.log('handler值被修改了',newValue,oldValue)
+// }
+
 //     firstName(val){
 // 异步操作
 //         setItemout(() => {
@@ -93,6 +97,21 @@
 //         this.fullName = this.firstName + '-' +val
 //     }
 // }
+
+
+//  computed:{
+//     filsperson:{
+//         const arr = this.person.filter((p) =>{
+//             return p.name.index(this.keyword) !==-1
+//         })
+//         // 判断排序
+//         if(this.sortype){
+//             arr.sort((p1,p2) => {
+//                 return this.sortype === 1 ? p2.age-p1.age:p1.age-p2.age;
+//             })
+//         }
+//     }
+// } 
 
 //5.v-for 为什么要绑定 key值
 

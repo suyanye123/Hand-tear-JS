@@ -10,86 +10,44 @@
 </head>
 
 <body>
-    <!-- <div id="root">
-        <form action="" @submit.prevent="demo">
-            prevent 阻止默认行为
-            账号：<input type="text" v-model.userInfo="account"><br><br> 密码：
-            <input type="password" v-model.userInfo="password"><br><br> 性别： 男
-            <input type="radio" name="sex" v-model.userInfo="sex" value="male"> 女
-            <input type="radio" name="sex" v-model.userInfo="sex" value="female"> <br><br> 爱好： 学习
-            <input type="checkbox" v-model.userInfo="hoddy" value="study"> 打游戏
-            <input type="checkbox" v-model.userInfo="hoddy" value="games"> 吃饭
-            <input type="checkbox" v-model.userInfo="hoddy" value="eat"> <br><br> 所属校区
-            <select name="" id="" v-model.userInfo="city">
-                <option value="">请选择小区</option>
-                <option value="">北京</option>
-                <option value="shanghai">上海</option>
-                <option value="shenzheng">深圳</option>
-                <option value="wuhan">武汉</option>
-            </select><br><br> 其他信息：
-            <textarea v-model.userInfo="other"></textarea><br><br>
-            <input type="checkbox" v-model="agree"> 阅读并接受<a href="#">《用户协议》</a>
-            <button>提交</button>
-        </form>
-
-
-        <hr>
-        
-    </div> -->
-
-    <div id="root">
-        <h2>今天天气很{{info}}-{{add}}</h2>
-        <button @click="weatherClick()">按钮</button>
+    <div id="root" @submit.prevent='demo()'>
+        账号：<input type="text" v-model.trim="info.text"> <br/><br/> 密码：
+        <input type="password" v-model.trim="info.password"> <br/><br/> 性别：男
+        <input type="radio" v-model='info.sex' value="male"> 女
+        <input type="radio" v-model='info.sex' value="female"><br><br> 爱好：抽烟
+        <input type="checkbox" v-model="info.hoddy" value="chouyan"> 喝酒
+        <input type="checkbox" value="dirve"> 烫头
+        <input type="checkbox" value="head"><br><br> 所属校区：
+        <select v-model="info.city">
+        <option value="">北京</option>
+        <option value="shanghai">上海</option>
+        <option value="shenzhen">深圳</option>
+        <option value="tianjin">天津</option>
+        </select><br><br> 其他信息:
+        <textarea v-model.lazy="info.other"></textarea><br><br>
+        <input type="checkbox" v-model="info.agree">阅读并接受<a href="#">《用户协议》</a>
+        <button>提交</button>
     </div>
     <script>
-        Vue.config.productionTip = false
-
-        const vm = new Vue({
-            el: "#root",
+        new Vue({
+            el: '#root',
             data: {
-                isHot: false,
-                add: 1
+                info: {
+                    text: '',
+                    password: '',
+                    sex: '',
+                    hoddy: [],
+                    city: '',
+                    other: '',
+                    agree: '',
 
+
+                }
             },
             methods: {
-                weatherClick() {
-                    this.isHot = !this.isHot
-                    this.add++
+                demo() {
+                    console.log(JSON.stringify(this.info))
                 }
-            },
-            computed: {
-                info() {
-                    return this.isHot ? '炎热' : '凉爽'
-                }
-            },
-            // watch: {
-            //     'isHot': {
-            //         immediate: true, //初始化时让handler调用一下
-            //         handler(newValue, oldValue) {
-            //             console.log('ishot值被修改了', newValue, oldValue)
-            //         }
-            //     }
-            // }
-
-
-
-            // // Vue完成模板的解析并把初始化的真实DOM放在页面之后（挂载完成之后）调用mounted
-            // mounted() {
-            //     console.log('mounted')
-            //     setInterval(() => {
-            //         this.opacity -= 0.01
-            //             // 进行判断
-            //         if (this.opacity <= 0) {
-            //             this.opacity = 1
-            //         }
-            //     }, 16);
-            // }
-
-        })
-        vm.$watch('isHot', {
-            immediate: true, //初始化时让handler调用一下
-            handler(newValue, oldValue) {
-                console.log('isHot被修改了', newValue, oldValue)
             }
         })
     </script>
