@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../lsh/js/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <h2>今天天气很{{info}}</h2>
+    <button @click="changeClick">按钮</button>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false; //阻止vue在启动时产生生产提示
+const vm = new Vue({ 
+  el:'#root',
+  data() {
+    return {
+      isHot: false
+    }
+  },
+  methods: {
+    changeClick(){
+      return this.isHot = !this.isHot
+    }
+  },
+  computed: {
+    info() {
+      //用三元运算符来判断天气炎热还是凉爽 ,记住，一定要获取你要的数据，this.isHot
+      return this.isHot ? '炎热' : '凉爽'
+    }
+  },
+//   watch:{//watch也是一个对象
+  
+//    isHot:{
+//    handler(newValue,oldValue){//什么时候被调用，当info发生改变时
+//   console.log('isHot属性被修改了',newValue,oldValue)
+//   }
+//    }
+
+ 
+// }
+})
+//通过vm 来实现监视
+//需要注意的是，当用vm.$watch来实现监视的时候，一定要写在vue的最外面，并且'isHot',{}监视这个属性的时候，一定要加大括号
+vm.$watch('isHot',{
+  handler(newValue,oldValue){
+   console.log('isHot属性被修改了',newValue,oldValue)}
+
+ })
+
+</script>
+<style  lang='' scoped >
+</style>
+
+  </script>
+</html>
