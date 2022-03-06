@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <style>
+        .basic {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            background: blue;
+            color: white;
+        }
+        
+        .normal {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+        }
+        
+        .happy {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            background: rgb(214, 1, 1);
+            color: rgb(255, 255, 255);
+        }
+        
+        .atguigu1 {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            background: rgb(214, 1, 1);
+            color: rgb(255, 255, 255);
+        }
+        
+        .atguigu2 {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            background: rgb(223, 130, 130);
+            text-shadow: 2px 2px #fd0000;
+            font-size: 20px;
+        }
+        
+        .atguigu3 {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            border-radius: 50px;
+            background: rgb(223, 130, 130);
+            text-shadow: 2px 2px #fd0000;
+            font-size: 20px;
+        }
+    </style>
+    <script src="../../lsh/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        //class绑定样式，字符串写法，适用于：样式类名不确定，需要动态指定来选择
+        <div class="basic" :class='a' @clcik='change'>{{name}}</div>
+
+        //class绑定样式,数组写法，适用于：样式类名确定，
+        <div class="basic" :class='classArr'>{{name}}</div>
+        //class绑定样式,对象写法，适用于：样式类不确定，类型确定
+        <div class="basic" :class='classArr'>{{name}}</div>
+
+        //style绑定样式,对象写法
+        <div class="basic" :style='ArrObj'></div>
+
+        //style绑定样式,数组写法
+        <div class="basic" :style='ArrObj1'></div>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false; //阻止vue在启动时产生生产提示
+    new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: '尚硅谷',
+                a: 'normal',
+                // classArr:['atguigu1','atguigu2','atguigu3']
+                classArr: {
+                    atguigu1: false,
+                    atguigu2: false,
+                    ArrObj: {
+                        fontSize: '40px',
+                        color: 'red'
+                    },
+                    ArrObj1: {
+                        backgroundColor: 'orange'
+                    },
+                    Arr: ['ArrObj', 'ArrObj1']
+
+                }
+            }
+        },
+        methods: {
+            change() {
+                this.a = 'happy'
+            }
+        }
+    })
+</script>
+
+
+</html>

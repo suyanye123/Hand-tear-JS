@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <script src="../../lsh/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- v-for:遍历数据列表， v-for="xxx of xxx" :key="xxx"-->
+        <!-- 遍历数组 -->
+        <button @click='btnClick'>按钮</button>
+        <ul v-for="(list,index) of person" :key="list.id">
+            <li>{{list.name}}---{{index}}
+                <input type="text" name="" id="">
+            </li>
+
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false; //阻止vue在启动时产生生产提示
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                person: [{
+                    id: '001',
+                    name: '张三',
+                    age: 16
+                }, {
+                    id: '002',
+                    name: '张四',
+                    age: 16
+                }, {
+                    id: '003',
+                    name: '张五',
+                    age: 16
+                }],
+
+            }
+        },
+        methods: {
+            btnClick() {
+                const p = {
+                    id: '004',
+                    name: '里斯',
+                    age: 18
+                }
+
+                this.person.unshift(p)
+            }
+        }
+    })
+</script>
+
+
+</html>
