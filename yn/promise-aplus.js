@@ -148,7 +148,7 @@ promises-aplus-tests 文件名
  */
 Promise.defer = Promise.deferred = function () {
   let dfd = {};
-  dfd.promise = new Promise((resolve, reject) => {
+  dfd.promise = new PromiseA((resolve, reject) => {
     dfd.resolve = resolve;
     dfd.reject = reject;
   });
