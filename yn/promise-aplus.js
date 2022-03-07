@@ -1,3 +1,4 @@
+//根据promise A+规范实现一个promise
 //promise code
 const PENDING = "PENDING";
 const FULFILLED = "FULFILLED";
