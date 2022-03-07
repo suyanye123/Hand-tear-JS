@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../lsh/js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>显示格式化的时间</h2>
+        <!-- 用计算属性实现 -->
+        <h3>现在是：{{fmtime}}</h3>
+        <!-- 用方法属性实现 -->
+        <h3>现在是：{{getfmtime}}</h3>
+        <!-- 用过滤器实现 -->
+        <h3>现在是：{{time | timeformat}}</h3>
+        <!-- 用过滤器(传参)实现 -->
+        <h3>现在是：{{time | timeformat('YYYY_MM_DD') | mysilce}}</h3>
+        <h3>现在是：{{msg | mysilce') | mysilce}}</h3>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false
+        //全局过滤器
+    Vue.filter('myslice', function(val) {
+        return val.slice(0, 4)
+    })
+    new Vue({
+        el: '#root',
+        data: {
+            time: 1621561377603,
+        },
+        computed: {
+            fmtime() {
+                return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+            }
+        },
+        methods: {
+            getfmtime() {
+                return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+            }
+        },
+        filters: {
+            timeformat(val, str = 'YYYY年MM月DD日 HH:mm:ss') {
+                // console.log('@', value)
+                return dayjs(val).format(str)
+            },
+            mysilce(value) {
+                return value.slice(0, 4)
+            }
+        }
+
+    })
+</script>
+
+</html>

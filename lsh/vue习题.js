@@ -47,94 +47,15 @@
 //4.computed和watch有什么区别？
 // computed计算属性能做到的功能，watch也可以做到
 // watch能做到的功能，computed不能做到,例如：异步操作
-// computed: {
-// fullName:{
-//     get(){
-//         console.log('get值改变了')
-//         return this.firstName + '-'+ this.lastName;
-//     }
-//     set(value){
-//         console.log('set值被修改了')
-//         const arr = value.split('-')
-//         this.firstName[0]
-//         this.lastName[1]
-//     }
-// }
+// vue中管理的数据，最好用普通函数，不是vue管理的函数(定时器回调函数，ajax回调函数，promise回调函数)，最好用箭头函数
 
-//简写（当你确定是只读不修改的情况下用）
-// fullName(){
-//     get(){
-//         return this.firstName + '-' + this.lastName
-//     }
-// }
-
-// info(){
-//     return this.isHot ?:'炎热':'凉爽'
-// }
-// }
-
-// watch： {
-//     // 'isHot':{
-//     //     immediate:true,//初始化时handler调用一下
-//     //     handler(newValue,oldValue){
-//     //         console.log('handler值被修改了',newValue,oldValue)
-//     //     }
-//     // }
-
-//      简写
-// 'isHot'(newValue,oldValue){
-//     console.log('handler值被修改了',newValue,oldValue)
-// }
-
-//     firstName(val){
-// 异步操作
-//         setItemout(() => {
-//           return  this.fullName = val + '-' + this.lastName
-//         },1000)
-
-//     }
-//     lastName(val){
-//         this.fullName = this.firstName + '-' +val
-//     }
-// }
-
-
-//  computed:{
-//     filsperson:{
-//         const arr = this.person.filter((p) =>{
-//             return p.name.index(this.keyword) !==-1
-//         })
-//         // 判断排序
-//         if(this.sortype){
-//             arr.sort((p1,p2) => {
-//                 return this.sortype === 1 ? p2.age-p1.age:p1.age-p2.age;
-//             })
-//         }
-//     }
-// } 
 
 //5.v-for 为什么要绑定 key值
-
 // key的作用主要是为了高效地更新虚拟DOM， 另外vue中在使用相同标签名元素地过渡切换时，
-// 也会用到key属性， 其目的也是为了让vue可以区分他们， 否则， 当数据发生变化时， vue会根据新数据
-// 生成新的虚拟DOM， 随后vue进行新虚拟DOM与旧的虚拟DOM的差异比较。
+// 也会用到key属性， 其目的也是为了让vue可以区分他们,如果不加key,那么当数据发生变化时，vue根据数据生成新的虚拟DOM，然后新的虚拟DOM跟旧的虚拟DOM进行差异比较
+// 比较规则：新的虚拟DOM跟旧的虚拟DOM比，你又id为0，我也有，那么我们就能成，
 
 
-// 1，虚拟DOM中key的作用：
-// key是虚拟DOM对象的标识，当数据发生变化时，vue会根据【新数据】生成【新的虚拟DOM】
-// 随后vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，
-
-// 用index作为key可能会引发的问题：
-// 1，若对数据进行：逆序添加、逆序删除等破坏顺序操作。
-// 会产生没有必要的真实DOM更新  ==》界面效果没问题，但效率低
-
-// 2，如果结构中还包含输入类的DOM：
-// 会产生错误DOM更新==》界面有问题
-
-// 4，开发中如何选择key?:
-// 1，最好使用每条数据的唯一标识作为key,比如id、手机号、身份证，学号唯一值
-// 2，如果不存在对数据的逆序添加，逆序删除等破摔顺序操作，仅用于渲染列表用于展示
-// 使用index作为key是没有问题的。
 
 
 

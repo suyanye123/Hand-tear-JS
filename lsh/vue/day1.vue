@@ -2,7 +2,7 @@
 pop() push() shift() unshift() resever() slice() splice() filter() 
 
 //watch computed怎么用
-computed 计算属性，读取已有的属性，利用Object的对象的getter,setter属性
+computed 计算属性，读取已有的属性，利用Object.difine的对象的getter,setter属性
 优势：跟methos相比，内有缓存机制，效率高，方便复用
 什么调用：1，初次读取的时候调用，2，依赖的数据发生变化的时候调用
 <!--<template>
@@ -14,12 +14,11 @@ computed 计算属性，读取已有的属性，利用Object的对象的getter,s
 </template>
 <script>
 export default {
-  data() {
-    return {
+  data: {
       firstName: '三',
       lastName: '张',
       fullName: ''
-    }
+
   },
   methods: {
 
@@ -50,7 +49,7 @@ export default {
 //天气案例，用computed来实现
 <template>
   <div>
-    <h2>今天天气很{{info}}</h2>
+    <h2>今天天气很{{ info }}</h2>
     <button @click="changeClick">按钮</button>
   </div>
 </template>
@@ -58,21 +57,21 @@ export default {
 export default {
   data() {
     return {
-      isHot: flase
-    }
+      isHot: flase,
+    };
   },
   methods: {
     changeClick() {
-      this.isHot = !this.isHot
-    }
+      this.isHot = !this.isHot;
+    },
   },
   computed: {
     info() {
       //用三元运算符来判断天气炎热还是凉爽,记住，一定要获取你要的数据，this.isHot而不是isHot = true
-      return this.isHot ? '炎热' : '凉爽'
-    }
-  }
-}
+      return this.isHot ? "炎热" : "凉爽";
+    },
+  },
+};
 </script>
 
 

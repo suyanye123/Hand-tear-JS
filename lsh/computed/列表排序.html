@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../lsh/js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <input type="text" v-model='keyword'>
+        <button @click='sortype = 2'>升序</button>
+        <button @click='sortype = 1'>降序</button>
+        <button @click='sortype = 0'>原顺序</button>
+        <!-- 记住要将of 后面的数组改成personfile空数组 -->
+        <ul v-for='(list,index) of personfile' :key='index'>
+            <li>
+                {{list.name}}---{{list.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#root',
+        data: {
+            keyword: '',
+            sortype: 0,
+            person: [{
+                id: '001',
+                name: '马冬梅',
+                age: 30
+            }, {
+                id: '001',
+                name: '周冬雨',
+                age: 31
+            }, {
+                id: '001',
+                name: '周杰伦',
+                age: 18
+            }, {
+                id: '001',
+                name: '张一三',
+                age: 19
+            }, ],
+            // personfile: []
+        },
+        // watch: {//如果不写personfile的空数组的话，那么没写一个就会减少一个
+        //     keyword(val) {
+        //         // console.log('val被修改了', val)
+        //         this.personfile = this.person.filter((p) => {
+        //             return p.name.indexOf(val) !== -1
+        //         })
+        //     }
+        // }
+
+        computed: {
+            personfile() {
+                const arr = this.person.filter((p) => {
+                    return p.name.indexOf(this.keyword) !== -1
+                })
+                if (this.sortype) {
+                    arr.sort((a, b) => {
+                        return this.sortype === 1 ? b.age - a.age : a.age - b.age
+                    })
+                }
+                return arr
+            }
+        }
+    })
+</script>
+
+</html>

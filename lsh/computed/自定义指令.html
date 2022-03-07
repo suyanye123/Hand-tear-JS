@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>当前的值是：<span v-text="n"></span></h2>
+        <h2>放大10倍的值：<span v-big="n"></span></h2>
+        <button @click='n++'>点我加1</button>
+        <hr>
+        <input type="text" v-fbind='n'>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false
+        //全局定义对象
+        // Vue.directive('fbind', { //vue会帮我们解析这些函数
+        //     //1，当指令跟元素成功绑定时（一上来）
+        //     bind(element, binding) {
+        //         element.value = binding.value * 10
+        //     },
+        //     //2，指令所在元素插入页面时
+        //     inserted(element, binding) {
+        //         element.focus()
+        //     },
+        //     //3，指令所在的模板重新解析时
+        //     update(element, binding) {
+        //         element.value = binding.value * 10
+        //     }
+        // })
+        //全局定义函数
+    Vue.directive('big', function(element, binding) {
+        console.log('big')
+        element.innerText = binding.value * 10
+    }, )
+    new Vue({
+        el: '#root',
+        data: {
+            n: 10
+        },
+        directives: { //big函数什么时候调用？1，当指令跟元素成功绑定时（一上来），2，指令所在的模板重新解析时
+            // big(element, binding) {
+            //     console.log('big')
+            //     element.innerText = binding.value * 10
+            // },
+            fbind: { //vue会帮我们解析这些函数
+                //1，当指令跟元素成功绑定时（一上来）
+                bind(element, binding) {
+                    element.value = binding.value * 10
+                },
+                //2，指令所在元素插入页面时
+                inserted(element, binding) {
+                    element.focus()
+                },
+                //3，指令所在的模板重新解析时
+                update(element, binding) {
+                    element.value = binding.value * 10
+                }
+            }
+        }
+    })
+</script>
+
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>学校信息</h2>
+        <h4>学校名称：{{name}}</h4>
+        <h4>学校地址：{{address}}</h4>
+        <h4>校长是：</h4>
+        <hr>
+        <h2>学生信息</h2>
+        <button @click="addSex">添加一个性别属性，默认值是男</button>
+        <h4>姓名：{{sutdent.name}}</h4>
+        <h2 v-if="sutdent.sex">性别:{{sutdent.sex}}</h2>
+        <h4>年龄：真实{{sutdent.ager.age1}}，对外29{{sutdent.ager.age2}}</h4>
+        <h4>朋友们</h4>
+        <h5 v-for='(list,index) in sutdent.frient' :key='index'>
+            {{list.name}} --- {{list.age}}
+        </h5>
+    </div>
+</body>
+<script>
+    Vue.config.producrionTip = false
+    new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷',
+            address: '北京',
+            sutdent: {
+                name: 'tom',
+                sex: '',
+                ager: {
+                    age1: 40,
+                    age2: 29
+                },
+                frient: [{
+                    name: 'jerry',
+                    age: 35
+                }, {
+                    name: 'tony',
+                    age: 36
+                }]
+            }
+        },
+        methods: {
+            addSex() {
+                // Vue.set(this.sutdent, 'sex', '男')
+                this.$set(this.sutdent, 'sex', '男')
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../lsh/js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <input type="text" v-model='keyword'>
+        <!-- 记住要将of 后面的数组改成personfile空数组 -->
+        <ul v-for='(list,index) of personfile' :key='index'>
+            <li>
+                {{list.name}}---{{list.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false
+    new Vue({
+        el: '#root',
+        data: {
+            keyword: '',
+            person: [{
+                id: '001',
+                name: '马冬梅',
+                age: 18
+            }, {
+                id: '001',
+                name: '周冬雨',
+                age: 28
+            }, {
+                id: '001',
+                name: '周杰伦',
+                age: 38
+            }, {
+                id: '001',
+                name: '张一三',
+                age: 68
+            }, ],
+            // personfile: []
+        },
+        // watch: {//如果不写personfile的空数组的话，那么没写一个就会减少一个
+        //     keyword(val) {
+        //         // console.log('val被修改了', val)
+        //         this.personfile = this.person.filter((p) => {
+        //             return p.name.indexOf(val) !== -1
+        //         })
+        //     }
+        // }
+
+        computed: {
+            personfile() {
+                return this.personfile = this.person.filter((p) => {
+                    return p.name.indexOf(this.keyword) !== -1
+                })
+            }
+        }
+    })
+</script>
+
+</html>

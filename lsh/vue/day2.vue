@@ -16,12 +16,10 @@ vue管理的函数，最好写成普通函数，
 Vue.config.productionTip = false; //阻止vue生产提示
 const vm = new Vue({
   el: "#root",
-  data() {
-    return {
-      firstName: "张",
-      lastName: "三",
-      fullName: "",
-    };
+  data: {
+    firstName: "张",
+    lastName: "三",
+    fullName: "",
   },
   //   computed: {
   //     fullName: {
@@ -53,8 +51,7 @@ const vm = new Vue({
     </div>
 new Vue({
         el: '#root',
-        data() {
-            return {
+        data:{
                 name: '尚硅谷',
                 a: 'normal',
                 // classArr:['atguigu1','atguigu2','atguigu3']
@@ -62,8 +59,6 @@ new Vue({
                     atguigu1: false,
                     atguigu2: false,
                 } 
-
-                }
             
         },
         methods: {
