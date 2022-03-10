@@ -11,17 +11,10 @@
 
 <body>
     <div id="root">
-        <h2>人员列表</h2>
-        <input type="text" v-model='keyword'>
-        <button @click='sortype = 2'>升序</button>
-        <button @click='sortype = 1'>降序</button>
-        <button @click='sortype = 0'>原顺序</button>
-        <!-- 记住要将of 后面的数组改成personfile空数组 -->
-        <ul v-for='(list,index) of personfile' :key='index'>
-            <li>
-                {{list.name}}---{{list.age}}
-            </li>
-        </ul>
+        <h2>你好啊 <span v-text='n'></span></h2>
+        <h2>你好啊 <span v-big='n'></span></h2>
+        <button type="" @click='n++'>点我加1</button>
+        <input type="text" name="" id="" v-fbind="n">
     </div>
 </body>
 <script>
@@ -29,47 +22,25 @@
     new Vue({
         el: '#root',
         data: {
-            keyword: '',
-            sortype: 0,
-            person: [{
-                id: '001',
-                name: '马冬梅',
-                age: 30
-            }, {
-                id: '001',
-                name: '周冬雨',
-                age: 31
-            }, {
-                id: '001',
-                name: '周杰伦',
-                age: 18
-            }, {
-                id: '001',
-                name: '张一三',
-                age: 19
-            }, ],
-            // personfile: []
+            n: 1
         },
-        // watch: {//如果不写personfile的空数组的话，那么没写一个就会减少一个
-        //     keyword(val) {
-        //         // console.log('val被修改了', val)
-        //         this.personfile = this.person.filter((p) => {
-        //             return p.name.indexOf(val) !== -1
-        //         })
-        //     }
-        // }
-
-        computed: {
-            personfile() {
-                const arr = this.person.filter((p) => {
-                    return p.name.indexOf(this.keyword) !== -1
-                })
-                if (this.sortype) {
-                    arr.sort((a, b) => {
-                        return this.sortype === 1 ? b.age - a.age : a.age - b.age
-                    })
+        directives: { //big函数什么时候调用，1，当指令跟元素成功绑定时，2，指令所在的模板重新解析时
+            big(element, binding) {
+                element.innerText = binding.value * 10
+            },
+            fbind: {
+                //1，当指令跟元素成功绑定时
+                bind(element, binding) {
+                    element.value = binding.value * 10
+                },
+                //2，指定所在元素插入页面时
+                inserted(element, binding) {
+                    element.focus()
+                },
+                //3，指定所在的模板重新解析时
+                update(element, binding) {
+                    element.value = binding.value * 10
                 }
-                return arr
             }
         }
     })

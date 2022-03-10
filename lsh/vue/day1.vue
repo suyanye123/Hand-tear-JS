@@ -17,7 +17,7 @@ export default {
   data: {
       firstName: '三',
       lastName: '张',
-      fullName: ''
+      
 
   },
   methods: {

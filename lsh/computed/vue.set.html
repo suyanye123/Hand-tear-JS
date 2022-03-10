@@ -11,52 +11,110 @@
 
 <body>
     <div id="root">
-        <h2>学校信息</h2>
-        <h4>学校名称：{{name}}</h4>
-        <h4>学校地址：{{address}}</h4>
-        <h4>校长是：</h4>
-        <hr>
-        <h2>学生信息</h2>
-        <button @click="addSex">添加一个性别属性，默认值是男</button>
-        <h4>姓名：{{sutdent.name}}</h4>
-        <h2 v-if="sutdent.sex">性别:{{sutdent.sex}}</h2>
-        <h4>年龄：真实{{sutdent.ager.age1}}，对外29{{sutdent.ager.age2}}</h4>
-        <h4>朋友们</h4>
-        <h5 v-for='(list,index) in sutdent.frient' :key='index'>
-            {{list.name}} --- {{list.age}}
-        </h5>
+        <!-- 计算属性，读取已有的属性，利用object.difinepreto的对象的setter,getter属性，优势是内有缓存机制， -->姓：
+        <!-- <input type="text" name="" id="" v-model='firstName'><br><br> 名：
+        <input type="text" name="" id="" v-model='lastName'><br><br> 全名：
+        <div>{{fullName}}</div> -->
+        <!-- <h2>今天天气很{{info}}</h2>
+        <button @click='changeWeatherClick'>按钮</button> -->
+        <h2>人员列表</h2>
+        <input type="text" name="" id="" v-model='keyword'>
+        <ul v-for='list in personfile' :key='list.id'>
+            <li>{{list.id}}-----{{list.name}} ---{{list.age}}</li>
+        </ul>
     </div>
 </body>
 <script>
     Vue.config.producrionTip = false
-    new Vue({
-        el: '#root',
-        data: {
-            name: '尚硅谷',
-            address: '北京',
-            sutdent: {
-                name: 'tom',
-                sex: '',
-                ager: {
-                    age1: 40,
-                    age2: 29
-                },
-                frient: [{
-                    name: 'jerry',
-                    age: 35
+    const vm = new Vue({
+            el: '#root',
+            data: {
+                keyword: '',
+                person: [{
+                    id: '001',
+                    name: '马冬梅',
+                    age: 18
                 }, {
-                    name: 'tony',
-                    age: 36
-                }]
+                    id: '002',
+                    name: '周冬雨',
+                    age: 28
+                }, {
+                    id: '003',
+                    name: '周杰伦',
+                    age: 38
+                }, {
+                    id: '004',
+                    name: '张一三',
+                    age: 68
+                }],
+                // personfile: []
+                // firstName: '张',
+                // lastName: '三',
+                // isHot: false,
+
+                // fullName:''这个在计算属性中绝对不能写在数据中，会报错
+            },
+            // watch: {
+            //     keyword(val) {
+            //         console.log('val', val)
+            //         this.personfile = this.person.filter((p) => {
+            //             return p.name.indexOf(val) !== -1
+            //         })
+            //     }
+            // },
+            computed: {
+                personfile() {
+                    return this.personfile = this.person.filter((p) => {
+                        return p.name.indexOf(this.keyword) !== -1
+                    })
+                }
             }
-        },
-        methods: {
-            addSex() {
-                // Vue.set(this.sutdent, 'sex', '男')
-                this.$set(this.sutdent, 'sex', '男')
-            }
-        }
-    })
+            // methods: {
+            //     changeWeatherClick() {
+            //         this.isHot = !this.isHot
+            //     }
+            // },
+            // computed: {
+            //     info() {
+            //         return this.isHot ? '炎热' : '凉爽'
+            //     }
+            // },
+            // computed: {
+            //     fullName: { //什么时候被调用，1，初次读取的调用，2，所依赖的数据发生变化时
+            //         get() {
+            //             // console.log('get函数读取了')
+            //             return this.firstName + '-' + this.lastName
+            //         },
+            //         set(value) {
+            //             const arr = value.split('-')
+            //             this.firstName = arr[0],
+            //                 this.lastName = arr[1]
+            //         }
+            //     }
+            // }
+            //简写,只有只读的时候
+            // computed: {
+            //     fullName() {
+            //         return this.firstName + '-' + this.lastName
+            //     }
+            // }
+            //watch 监视数据变化，监视已有的属性，有两种写法，一种是通过watch来写，另一种是通过$watch写法
+            // watch: {
+            //     info: {
+            //         immediate: true,
+            //         handler(newValue, oldValue) {
+            //             console.log('handler值被修改了', newValue, oldValue)
+            //         }
+            //     }
+            // }
+            //局部监视
+        })
+        // vm.$watch('isHot', {
+        //     immediate: true,
+        //     handler(newValue, oldValue) {
+        //         console.log('handler值被修改了', newValue, oldValue)
+        //     }
+        // })
 </script>
 
 </html>
