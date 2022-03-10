@@ -1,0 +1,20 @@
+{
+  "name": "hand-tear",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:yu-nan/hand-tear-js.git"
+  },
+  "author": "suyanye123",
+  "license": "ISC",
+  "dependencies": {
+    "mobx": "^6.4.2",
+    "mobx-react-lite": "^3.3.0"
+  }
+}
